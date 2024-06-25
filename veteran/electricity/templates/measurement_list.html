@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<table>
+    <thead>
+        <tr>
+            <th>{{ verbose_names.date }}</th>
+            <th>{{ verbose_names.value_day }}</th>
+            <th>{{ verbose_names.value_night }}</th>
+            <th>{{ verbose_names.user }}</th>
+            <th>{{ verbose_names.plot }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for measurement in measurements %}
+        <tr>
+            <td>{{ measurement.date|date:"d.m.Y" }}</td>
+            <td>{{ measurement.value_night }}</td>
+            <td>{{ measurement.value_day }}</td>
+            <td>{{ measurement.user.lastname }} {{ measurement.user.firstname }}</td>
+            <td>{{ measurement.plot }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td>No measurements found for this plot</td
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'measurement_add' %}">Add Measurement</a>
+</body>
+</html>
