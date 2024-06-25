@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Measurement
 from .forms import MeasurementForm
+import datetime
 
 
 def index(request):
@@ -14,6 +15,8 @@ def measurement_add(request):
             measurement = form.save(commit=False)
             measurement.user = request.user
             measurement.plot = request.user.plot
+            # measurement.month = datetime.datetime.now().month
+            # measurement.year = datetime.datetime.now().year
             measurement.save()
             return redirect('measurement_list')
     else:

@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+import datetime
 
 
 class Measurement(models.Model):
@@ -8,6 +9,8 @@ class Measurement(models.Model):
     date = models.DateTimeField(auto_now_add=True, verbose_name='Дата', null=True, blank=True)
     value_day = models.IntegerField(verbose_name='Денний тариф')
     value_night = models.IntegerField(verbose_name='Нічний тариф')
+    # month = models.IntegerField(default=datetime.datetime.now().month, verbose_name='Місяць')
+    # year = models.IntegerField(default=datetime.datetime.now().year, verbose_name='Рік')
 
     def __str__(self):
         if self.user:
