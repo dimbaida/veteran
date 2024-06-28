@@ -1,16 +1,13 @@
-{% load static %}  <!-- Load static files tag at the beginning -->
+{% extends 'base.html' %}
+{% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> <!-- Include jQuery -->
-    <script src="{% static 'js/expand_row.js' %}"></script>
-</head>
-<body>
+{% block title %}Measurements - Your Site Name{% endblock %}
 
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
 <table>
     <thead>
         <tr>
@@ -47,7 +44,9 @@
         </tr>
     </tbody>
 </table>
+{% endblock %}
 
-
-</body>
-</html>
+{% block extra_js %}
+    <!-- App-specific JavaScript (electricity) -->
+    <script src="{% static 'js/expand_row.js' %}"></script>
+{% endblock %}

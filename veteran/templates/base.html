@@ -1,10 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Title{% endblock %}</title>
+        {% load static %}
 
-</body>
+        <!-- Block for additional head elements -->
+        {% block extra_head %}
+        {% endblock %}
+    </head>
+    <body>
+
+    <!-- Menu -->
+    <nav class="top-menu">
+           <a href="">Home</a> || <a href="">Measurements</a>
+    </nav>
+
+    <!-- Content block -->
+    <div class="content">
+        {% block content %}
+        <!-- This block will be overridden in child templates -->
+        {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <!-- Footer content here -->
+        <p>Footer Content</p>
+    </footer>
+
+    <!-- Global JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Block for additional JavaScript -->
+    {% block extra_js %}
+    {% endblock %}
+
+    </body>
 </html>
