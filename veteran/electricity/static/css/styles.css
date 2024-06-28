@@ -2,22 +2,31 @@
 
 /* Basic table styling */
 table {
+    width: 800px; /* Fixed width */
     margin: 20px auto; /* Center align table */
     border-collapse: collapse;
     font-size: 14px; /* Smaller font size */
-    text-align: left;
     border: 1px solid #ccc;
 }
 
 /* Table header and cell styling */
 th, td {
-    padding: 8px; /* Reduced padding for smaller row height */
+    padding: 6px; /* Reduced padding for smaller row height */
     border: 1px solid #ccc;
 }
 
 /* Alternate row background color */
-tr:nth-child(even) {
+tr.odd {
     background-color: #f9f9f9;
+}
+
+tr.even {
+    background-color: white;
+}
+
+tr.additional-info {
+    background-color: #e0f0ff; /* Bluish background color for expanded row */
+    text-align: left;
 }
 
 /* Header background color */
@@ -32,7 +41,7 @@ tr:hover {
 }
 
 /* Center text in header and cells */
-th, td {
+th {
     text-align: center;
 }
 

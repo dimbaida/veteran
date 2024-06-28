@@ -1,10 +1,20 @@
+{% load static %}  <!-- Load static files tag at the beginning -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-      {% load static %}
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> <!-- Include jQuery -->
+    <script>
+    $(document).ready(function() {
+        // jQuery click event to toggle row details
+        $('tr.expandable-row').click(function() {
+            $(this).next('.additional-info').toggle();
+        });
+    });
+    </script>
 </head>
 <body>
 
@@ -20,20 +30,27 @@
     </thead>
     <tbody>
         {% for measurement in measurements %}
-        <tr>
+        <tr class="{% cycle 'odd' 'even' %} expandable-row">
             <td>{{ measurement.date|date:"d.m.Y" }}</td>
             <td>{{ measurement.value_night }}</td>
             <td>{{ measurement.value_day }}</td>
             <td>{{ measurement.user.lastname }} {{ measurement.user.firstname }}</td>
             <td>{{ measurement.plot }}</td>
         </tr>
+        <tr class="additional-info" style="display: none;">
+            <td colspan="5">
+                Additional Information:
+                Any additional details you want to show for this measurement.
+            </td>
+        </tr>
         {% empty %}
         <tr>
-            <td>No measurements found for this plot</td>
+            <td colspan="5">No measurements found for this plot</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 <a href="{% url 'electricity:measurements_add' %}">Add Measurement</a>
+
 </body>
 </html>
