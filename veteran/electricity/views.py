@@ -10,12 +10,17 @@ def index(request):
 
 
 def measurements_add(request):
+    user = request.user
+
+    if not user.is_authenticated:
+        return redirect(reverse('authuser:login'))
+
     if request.method == 'POST':
         form = MeasurementForm(request.POST)
         if form.is_valid():
             measurement = form.save(commit=False)
-            measurement.user = request.user
-            measurement.plot = request.user.plot
+            measurement.user = user
+            measurement.plot = user.plot
             # measurement.month = datetime.datetime.now().month
             # measurement.year = datetime.datetime.now().year
             measurement.save()
@@ -27,10 +32,11 @@ def measurements_add(request):
 
 def measurements(request):
     user = request.user
-    if user.is_staff:
-        measurements = Measurement.objects.all()
-    else:
-        measurements = Measurement.objects.filter(plot=user.plot)
+
+    if not user.is_authenticated:
+        return redirect(reverse('authuser:login'))
+
+    measurements = Measurement.objects.filter(plot=user.plot)
 
     verbose_names = {
         'date': Measurement._meta.get_field('date').verbose_name,

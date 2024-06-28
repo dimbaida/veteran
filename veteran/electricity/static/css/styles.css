@@ -2,7 +2,6 @@
 
 /* Basic table styling */
 table {
-    width: 800px; /* Fixed width */
     margin: 20px auto; /* Center align table */
     border-collapse: collapse;
     font-size: 14px; /* Smaller font size */
@@ -37,11 +36,11 @@ th {
 
 /* Hover effect for rows */
 tr:hover {
-    background-color: #f1f1f1;
+    background-color: #e0f0ff;
 }
 
 /* Center text in header and cells */
-th {
+th, td {
     text-align: center;
 }
 

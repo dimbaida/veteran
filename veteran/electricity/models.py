@@ -7,8 +7,8 @@ class Measurement(models.Model):
     plot = models.IntegerField(default=0, verbose_name='Ділянка')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Показ надав', null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True, verbose_name='Дата', null=True, blank=True)
-    value_day = models.IntegerField(verbose_name='Денний тариф')
-    value_night = models.IntegerField(verbose_name='Нічний тариф')
+    value_day = models.IntegerField(verbose_name='День')
+    value_night = models.IntegerField(verbose_name='Ніч')
     # month = models.IntegerField(default=datetime.datetime.now().month, verbose_name='Місяць')
     # year = models.IntegerField(default=datetime.datetime.now().year, verbose_name='Рік')
 

@@ -10,7 +10,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)  # Log the user in after successful registration
-            return redirect('measurement_list')  # Redirect to home page or any other page
+            return redirect(reverse('electricity:measurements'))  # Redirect to home page or any other page
     else:
         form = CustomUserCreationForm()
     return render(request, 'register.html', {'form': form})
