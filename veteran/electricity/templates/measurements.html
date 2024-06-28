@@ -36,12 +36,17 @@
         </tr>
         {% empty %}
         <tr>
-            <td colspan="5">No measurements found for this plot</td>
+            <td colspan="3">No measurements found for this plot</td>
         </tr>
         {% endfor %}
+        <tr>
+            <td colspan="3">
+                <button onclick="location.href = '{% url 'electricity:measurements_add' %}'" class="button" role="button">Внести свіжі покази</button>
+            </td>
+        </tr>
     </tbody>
 </table>
-<a href="{% url 'electricity:measurements_add' %}">Add Measurement</a>
+
 
 </body>
 </html>
