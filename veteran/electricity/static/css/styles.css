@@ -1,0 +1,76 @@
+/* styles.css */
+
+/* Basic table styling */
+table {
+    width: 800px; /* Fixed width */
+    margin: 20px auto; /* Center align table */
+    border-collapse: collapse;
+    font-size: 14px; /* Smaller font size */
+    text-align: left;
+    border: 1px solid #ccc;
+}
+
+/* Table header and cell styling */
+th, td {
+    padding: 8px; /* Reduced padding for smaller row height */
+    border: 1px solid #ccc;
+}
+
+/* Alternate row background color */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Header background color */
+th {
+    background-color: #333;
+    color: white;
+}
+
+/* Hover effect for rows */
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Center text in header and cells */
+th, td {
+    text-align: center;
+}
+
+/* Responsive table */
+@media screen and (max-width: 800px) {
+    table {
+        width: 100%; /* Ensure table uses full width on small screens */
+        border: 0;
+    }
+
+    table thead {
+        display: none;
+    }
+
+    table tr {
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    table td {
+        display: block;
+        text-align: right;
+        font-size: 12px; /* Smaller font size for responsive */
+        border-bottom: 1px solid #ccc;
+        position: relative;
+        padding-left: 50%;
+        padding-top: 12px; /* Ensure proper padding for responsive layout */
+        padding-bottom: 12px;
+    }
+
+    table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
+    }
+}
