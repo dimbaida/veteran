@@ -2,7 +2,6 @@
 
 /* Basic table styling */
 table {
-    width: 800px; /* Fixed width */
     margin: 20px auto; /* Center align table */
     border-collapse: collapse;
     font-size: 14px; /* Smaller font size */

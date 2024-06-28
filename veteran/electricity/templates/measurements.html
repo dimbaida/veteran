@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+      {% load static %}
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<table>
+    <thead>
+        <tr>
+            <th width="30px">{{ verbose_names.date }}</th>
+            <th width="80px">{{ verbose_names.value_day }}</th>
+            <th width="80px">{{ verbose_names.value_night }}</th>
+            <th width="160px">{{ verbose_names.user }}</th>
+            <th width="30px">{{ verbose_names.plot }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for measurement in measurements %}
+        <tr>
+            <td>{{ measurement.date|date:"d.m.Y" }}</td>
+            <td>{{ measurement.value_night }}</td>
+            <td>{{ measurement.value_day }}</td>
+            <td>{{ measurement.user.lastname }} {{ measurement.user.firstname }}</td>
+            <td>{{ measurement.plot }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td>No measurements found for this plot</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'electricity:measurements_add' %}">Add Measurement</a>
+</body>
+</html>

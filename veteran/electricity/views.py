@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from .models import Measurement
 from .forms import MeasurementForm
 import datetime
@@ -8,7 +9,7 @@ def index(request):
     return render(request, 'index.html')
 
 
-def measurement_add(request):
+def measurements_add(request):
     if request.method == 'POST':
         form = MeasurementForm(request.POST)
         if form.is_valid():
@@ -18,13 +19,13 @@ def measurement_add(request):
             # measurement.month = datetime.datetime.now().month
             # measurement.year = datetime.datetime.now().year
             measurement.save()
-            return redirect('measurement_list')
+            return redirect(reverse('electricity:measurements'))
     else:
         form = MeasurementForm()
-    return render(request, 'measurement_form.html', {'form': form})
+    return render(request, 'measurements_add.html', {'form': form})
 
 
-def measurement_list(request):
+def measurements(request):
     user = request.user
     if user.is_staff:
         measurements = Measurement.objects.all()
@@ -42,4 +43,4 @@ def measurement_list(request):
     context = {'measurements': measurements,
                'verbose_names': verbose_names}
 
-    return render(request,'measurement_list.html', context)
+    return render(request, 'measurements.html', context)
