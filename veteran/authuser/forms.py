@@ -8,11 +8,10 @@ class CustomUserCreationForm(UserCreationForm):
     firstname = forms.CharField(max_length=255, required=True)
     lastname = forms.CharField(max_length=255, required=True)
     mobile = forms.CharField(max_length=20, required=True)
-    plot = forms.IntegerField(required=True)
 
     class Meta:
         model = User
-        fields = ('email', 'firstname', 'lastname', 'mobile', 'plot', 'password1', 'password2')
+        fields = ('email', 'firstname', 'lastname', 'mobile', 'password1', 'password2')
 
 
 class CustomLoginForm(AuthenticationForm):

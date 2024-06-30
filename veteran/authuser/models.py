@@ -14,13 +14,11 @@ class CustomUserManager(UserManager):
         return user
 
     def create_user(self, email=None, password=None, **extra_fields):
-        extra_fields.setdefault('plot', None)
         extra_fields.setdefault('is_staff', None)
         extra_fields.setdefault('is_superuser', None)
         return self._create_user(email, password, **extra_fields)
 
     def create_superuser(self, email=None, password=None, **extra_fields):
-        extra_fields.setdefault('plot', None)
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         return self._create_user(email, password, **extra_fields)
@@ -31,7 +29,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     firstname = models.CharField(max_length=255, blank=True, default='')
     lastname = models.CharField(max_length=255, blank=True, default='')
     mobile = models.CharField(max_length=20, default='', blank=True, unique=True)
-    plot = models.CharField(blank=True, default=0)
 
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
@@ -44,7 +41,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
-    REQUIRED_FIELDS = ['firstname', 'lastname', 'mobile', 'plot']
+    REQUIRED_FIELDS = ['firstname', 'lastname', 'mobile']
 
     class Meta:
         verbose_name = 'Користувач'
