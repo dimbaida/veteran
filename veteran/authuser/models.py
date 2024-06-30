@@ -31,7 +31,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     firstname = models.CharField(max_length=255, blank=True, default='')
     lastname = models.CharField(max_length=255, blank=True, default='')
     mobile = models.CharField(max_length=20, default='', blank=True, unique=True)
-    plot = models.IntegerField(blank=True, default=0)
+    plot = models.CharField(blank=True, default=0)
 
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
@@ -55,3 +55,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return self.firstname
+
+    def __str__(self):
+        return f'{self.lastname} {self.firstname}'

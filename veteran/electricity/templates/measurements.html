@@ -12,6 +12,7 @@
     <thead>
         <tr>
             <th width="100px">{{ verbose_names.date }}</th>
+            <th width="100px">{{ verbose_names.plot }}</th>
             <th width="100px">{{ verbose_names.value_day }}</th>
             <th width="100px">{{ verbose_names.value_night }}</th>
         </tr>
@@ -20,11 +21,12 @@
         {% for measurement in measurements %}
         <tr class="{% cycle 'odd' 'even' %} expandable-row">
             <td>{{ measurement.date|date:"d.m.Y" }}</td>
+            <td>{{ measurement.plot }}</td>
             <td>{{ measurement.value_day }}</td>
             <td>{{ measurement.value_night }}</td>
         </tr>
         <tr class="additional-info" style="display: none;">
-            <td colspan="3"  style="text-align: left;">
+            <td colspan="4"  style="text-align: left;">
                 <ul>
                     <li> Показ надав: {{ measurement.user.lastname }} {{ measurement.user.firstname }}
                     <li> Дата і час: {{ measurement.date|date:"d.m.Y H:i" }}
@@ -33,11 +35,11 @@
         </tr>
         {% empty %}
         <tr>
-            <td colspan="3">No measurements found for this plot</td>
+            <td colspan="4">No measurements found for this plot</td>
         </tr>
         {% endfor %}
         <tr>
-            <td colspan="3">
+            <td colspan="4">
                 <button onclick="location.href = '{% url 'electricity:measurements_add' %}'"
                         class="button" role="button">Внести свіжі покази</button>
             </td>
