@@ -1,7 +1,6 @@
 from django.core.management.base import BaseCommand
 from electricity.models import Plot, Measurement
-import pandas as pd
-import numpy as np
+import csv
 from pathlib import Path
 
 
@@ -10,26 +9,26 @@ class Command(BaseCommand):
 
     def readValues(self):
         filepath = Path(__file__).parent / 'plots.csv'
-        df = pd.read_csv(filepath)
-        return df
+        with open(filepath, mode='r') as csv_file:
+            table = csv.reader(csv_file)
+            return list(table)
 
     def handle(self, *args, **kwargs):
         table = self.readValues()
-        for i in range(0, table.shape[0]):
-            verbose = table.loc[i, 'verbose']
-            value_night = table.loc[i, 'value_night']
-            if np.isnan(value_night):
-                value_night = None
-            value_day = table.loc[i, 'value_day']
-            plot, created = Plot.objects.get_or_create(verbose=verbose)
+        for row in table:
+            verbose = row[0]
+            value_day = row[3]
+            value_night = row[2]
+            print(verbose, value_day, value_night)
+            plot, plot_created = Plot.objects.get_or_create(verbose=verbose)
             if created:
                 print(plot, 'created')
-                measurement, success = Measurement.objects.get_or_create(value_night=value_night,
-                                                                         value_day=value_day,
+                measurement, measurement_created = Measurement.objects.get_or_create(value_day=value_day,
+                                                                         value_night=value_night,
                                                                          plot=plot,
                                                                          user_id=1,
                                                                          comment='Показ на момент запуску сайту')
-                if success:
+                if measurement_created:
                     print(measurement, 'ctreated')
             else:
                 print(plot, 'failed')
