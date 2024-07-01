@@ -30,6 +30,7 @@
                 <ul>
                     <li> Показ надав: {{ measurement.user.lastname }} {{ measurement.user.firstname }}
                     <li> Дата і час: {{ measurement.date|date:"d.m.Y H:i" }}
+                    <li> Комментар: {{ measurement.comment }}</li>
                 </ul>
             </td>
         </tr>
@@ -39,9 +40,13 @@
         </tr>
         {% endfor %}
         <tr>
-            <td colspan="4">
+            <td colspan="2">
                 <button onclick="location.href = '{% url 'electricity:measurements_add' %}'"
                         class="button" role="button">Внести свіжі покази</button>
+            </td>
+            <td colspan="2">
+                <button onclick="location.href = '{% url 'electricity:measurements_add' %}'"
+                        class="button" role="button">Сформувати квитанцію</button>
             </td>
         </tr>
     </tbody>

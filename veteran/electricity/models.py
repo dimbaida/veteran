@@ -3,8 +3,10 @@ from django.conf import settings
 
 
 class Plot(models.Model):
-    verbose = models.CharField(default='')
+    verbose = models.CharField(max_length=5, default='')
     balance = models.FloatField(default=0)
+    value_night_avg = models.IntegerField(blank=True, null=True)
+    value_day_avg = models.IntegerField(blank=True, null=True)
 
     class Meta:
         verbose_name = 'Ділянка'
@@ -30,8 +32,8 @@ class Measurement(models.Model):
                                       null=True)
     date = models.DateTimeField(auto_now_add=True,
                                 verbose_name='Дата')
-    is_approved = models.BooleanField(default=False,
-                                      verbose_name='Показ підтверджено')
+    is_paid = models.BooleanField(default=False,
+                                  verbose_name='Оплачено')
     approved_by = models.ForeignKey(settings.AUTH_USER_MODEL,
                                     related_name='approved_measurements',
                                     on_delete=models.PROTECT,
@@ -40,6 +42,10 @@ class Measurement(models.Model):
     approved_date = models.DateTimeField(verbose_name='Дата',
                                          null=True,
                                          blank=True)
+    comment = models.CharField(default='',
+                               verbose_name='comment',
+                               null=True,
+                               blank=True)
 
     class Meta:
         verbose_name = 'Показ'

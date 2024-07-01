@@ -28,11 +28,18 @@ def measurements_add(request):
 
 
 def measurements(request):
+
     user = request.user
-    plots = user.resident_set.values_list('plot__id', flat=True)  # Get IDs of plots associated with the user
 
     if not user.is_authenticated:
         return redirect(reverse('authuser:login'))
+
+    if False:
+        measurements = Measurement.objects.all().order_by('-date')
+    else:
+        plots = user.resident_set.values_list('plot__id', flat=True)  # Get IDs of plots associated with the user
+        measurements = Measurement.objects.filter(plot__id__in=plots).order_by('-date')
+
 
     verbose_names = {
         'date': Measurement._meta.get_field('date').verbose_name,
@@ -42,7 +49,7 @@ def measurements(request):
         'plot': Measurement._meta.get_field('plot').verbose_name,
     }
 
-    context = {'measurements': Measurement.objects.filter(plot__id__in=plots).order_by('date'),
+    context = {'measurements': measurements,
                'verbose_names': verbose_names}
 
     return render(request, 'measurements.html', context)
