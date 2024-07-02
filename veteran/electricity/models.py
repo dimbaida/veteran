@@ -3,10 +3,10 @@ from django.conf import settings
 
 
 class Plot(models.Model):
-    verbose = models.CharField(max_length=5, default='')
-    balance = models.FloatField(default=0)
-    value_night_avg = models.IntegerField(blank=True, null=True)
-    value_day_avg = models.IntegerField(blank=True, null=True)
+    verbose = models.CharField(max_length=5, default='', verbose_name='Номер ділянки')
+    balance = models.FloatField(default=0, verbose_name='Поточний баланс')
+    value_night_avg = models.IntegerField(blank=True, verbose_name='Середньомісячний показ "Ніч"', null=True)
+    value_day_avg = models.IntegerField(blank=True, verbose_name='Середньомісячний показ "День"', null=True)
 
     class Meta:
         verbose_name = 'Ділянка'
@@ -52,7 +52,7 @@ class Measurement(models.Model):
         verbose_name_plural = 'Покази'
 
     def __str__(self):
-        return f"[{self.date_created.strftime('%d.%m.%Y')}] Ділянка {self.plot} | Д: {self.value_day}, Н: {self.value_night}"
+        return f"[{self.date_created.strftime('%d.%m.%Y')}] Ділянка {self.plot} ---- Дeнь: {self.value_day} ---- Ніч: {self.value_night}"
 
 
 class Resident(models.Model):
@@ -61,11 +61,11 @@ class Resident(models.Model):
                              verbose_name='Ділянка')
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.PROTECT,
-                             verbose_name='Показ надав')
+                             verbose_name='Користувач')
 
     class Meta:
         verbose_name = 'Резидент'
         verbose_name_plural = 'Резиденти'
 
     def __str__(self):
-        return f"{self.plot.verbose_name} :: {self.user.lastnme} {self.user.firstname}"
+        return f"Ділянка {self.plot.verbose} --> {self.user.lastname} {self.user.firstname}"
