@@ -19,7 +19,7 @@ def measurements_add(request):
         form = MeasurementForm(request.POST, user=request.user)
         if form.is_valid():
             measurement = form.save(commit=False)
-            measurement.user = request.user
+            measurement.created_by = request.user
             measurement.save()
             return redirect(reverse('electricity:measurements'))
     else:
@@ -34,19 +34,17 @@ def measurements(request):
     if not user.is_authenticated:
         return redirect(reverse('authuser:login'))
 
-    if False:
-        measurements = Measurement.objects.all().order_by('-date')
-    else:
-        plots = user.resident_set.values_list('plot__id', flat=True)  # Get IDs of plots associated with the user
-        measurements = Measurement.objects.filter(plot__id__in=plots).order_by('-date')
+    plots = user.resident_set.values_list('plot__id', flat=True)  # Get IDs of plots associated with the user
+    measurements = Measurement.objects.filter(plot__id__in=plots).order_by('-date_created')
 
 
     verbose_names = {
-        'date': Measurement._meta.get_field('date').verbose_name,
+        'date_created': Measurement._meta.get_field('date_created').verbose_name,
         'value_day': Measurement._meta.get_field('value_day').verbose_name,
         'value_night': Measurement._meta.get_field('value_night').verbose_name,
-        'user': Measurement._meta.get_field('user').verbose_name,
+        'created_by': Measurement._meta.get_field('created_by').verbose_name,
         'plot': Measurement._meta.get_field('plot').verbose_name,
+        'paid': Measurement._meta.get_field('paid').verbose_name
     }
 
     context = {'measurements': measurements,

@@ -11,26 +11,32 @@
 <table>
     <thead>
         <tr>
-            <th width="100px">{{ verbose_names.date }}</th>
+            <th width="100px">{{ verbose_names.date_created }}</th>
             <th width="100px">{{ verbose_names.plot }}</th>
             <th width="100px">{{ verbose_names.value_day }}</th>
             <th width="100px">{{ verbose_names.value_night }}</th>
+            <th width="100px">{{ verbose_names.paid }}</th>
         </tr>
     </thead>
     <tbody>
         {% for measurement in measurements %}
         <tr class="{% cycle 'odd' 'even' %} expandable-row">
-            <td>{{ measurement.date|date:"d.m.Y" }}</td>
+            <td>{{ measurement.date_created|date:"d.m.Y" }}</td>
             <td>{{ measurement.plot }}</td>
             <td>{{ measurement.value_day }}</td>
             <td>{{ measurement.value_night }}</td>
+            <td>{% if measurement.paid %}так{% else %}ні{% endif %}</td>
         </tr>
         <tr class="additional-info" style="display: none;">
-            <td colspan="4"  style="text-align: left;">
+            <td colspan="5"  style="text-align: left;">
                 <ul>
-                    <li> Показ надав: {{ measurement.user.lastname }} {{ measurement.user.firstname }}
-                    <li> Дата і час: {{ measurement.date|date:"d.m.Y H:i" }}
+                    <li> Показ надав: {{ measurement.created_by.lastname }} {{ measurement.created_by.firstname }}
+                    <li> Дата і час: {{ measurement.date_created|date:"d.m.Y H:i" }}
                     <li> Комментар: {{ measurement.comment }}</li>
+                    {% if measurement.paid %}
+                    <li> Оплату підтвердив: {{ measurement.approved_by.lastname }} {{ measurement.approved_by.firstname }}</li>
+                    <li> Дата підтвердження: {{ measurement.date_approved|date:"d.m.Y H:i" }} </li>
+                    {% endif %}
                 </ul>
             </td>
         </tr>
@@ -44,7 +50,7 @@
                 <button onclick="location.href = '{% url 'electricity:measurements_add' %}'"
                         class="button" role="button">Внести свіжі покази</button>
             </td>
-            <td colspan="2">
+            <td colspan="3">
                 <button onclick="location.href = '{% url 'electricity:measurements_add' %}'"
                         class="button" role="button">Сформувати квитанцію</button>
             </td>

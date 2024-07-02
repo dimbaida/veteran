@@ -24,6 +24,10 @@ tr.even {
     background-color: white;
 }
 
+tr.paid {
+    background-color: green;
+}
+
 tr.additional-info {
     background-color: #eef7ff; /* Bluish background color for expanded row */
     text-align: left;
