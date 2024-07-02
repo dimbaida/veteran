@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.urls import reverse
-from .forms import CustomUserCreationForm, CustomLoginForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
+from .forms import CustomUserCreationForm, CustomLoginForm, CustomPasswordChangeForm
 
 
 def register(request):
@@ -29,3 +32,19 @@ def custom_login(request):
     else:
         form = CustomLoginForm()
     return render(request, 'login.html', {'form': form})
+
+
+@login_required
+def password_change(request):
+    if request.method == 'POST':
+        form = CustomPasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important to keep the user logged in
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('authuser:password_change_done')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = CustomPasswordChangeForm(request.user)
+    return render(request, 'password_change.html', {'form': form})

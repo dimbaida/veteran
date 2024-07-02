@@ -13,7 +13,7 @@
 
     <!-- Menu -->
     <nav class="top-menu" style="text-align: center">
-           <a href="">Home</a> || <a href="">Measurements</a> || Користувач: {{ user.lastname }} {{ user.firstname }} (<a href="">вийти</a>)
+           <a href="">Home</a> || <a href="">Measurements</a> || Користувач: {{ user.lastname }} {{ user.firstname }} (<a href="">вийти</a> | <a href="{% url 'authuser:password_change' %}">змінити пароль</a>)
     </nav>
 
     <!-- Content block -->
