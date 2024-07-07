@@ -4,6 +4,8 @@
     <file url="file://$PROJECT_DIR$/veteran/avg_measurements.csv" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/veteran/electricity/management/commands/create_plots.py" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/veteran/electricity/static/fonts" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/veteran/electricity/urls.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/veteran/electricity/views.py" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/veteran/last_measurements.csv" charset="windows-1251" />
     <file url="PROJECT" charset="windows-1251" />
   </component>

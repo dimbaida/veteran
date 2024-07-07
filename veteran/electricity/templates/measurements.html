@@ -22,7 +22,7 @@
         {% for measurement in measurements %}
         <tr class="{% cycle 'odd' 'even' %} expandable-row">
             <td>{{ measurement.date_created|date:"d.m.Y" }}</td>
-            <td>{{ measurement.plot }}</td>
+            <td>{{ measurement.plot.verbose }}</td>
             <td>{{ measurement.value_day }}</td>
             <td>{{ measurement.value_night }}</td>
             <td>{% if measurement.paid %}так{% else %}ні{% endif %}</td>
@@ -38,6 +38,10 @@
                     <li> Дата підтвердження: {{ measurement.date_approved|date:"d.m.Y H:i" }} </li>
                     {% endif %}
                 </ul>
+                {% if not measurement.paid %}
+                <button onclick="location.href = '{% url 'electricity:compose_paycheck' measurement.plot.id measurement.value_day measurement.value_night %}'"
+                        class="button" role="button">Сформувати квитанцію</button>
+                {% endif %}
             </td>
         </tr>
         {% empty %}
@@ -46,13 +50,9 @@
         </tr>
         {% endfor %}
         <tr>
-            <td colspan="2">
+            <td colspan="5">
                 <button onclick="location.href = '{% url 'electricity:measurements_add' %}'"
                         class="button" role="button">Внести свіжі покази</button>
-            </td>
-            <td colspan="3">
-                <button onclick="location.href = '{% url 'electricity:measurements_add' %}'"
-                        class="button" role="button">Сформувати квитанцію</button>
             </td>
         </tr>
     </tbody>
