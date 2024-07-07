@@ -4,16 +4,41 @@
 {% block title %}Measurements - Your Site Name{% endblock %}
 
 {% block extra_head %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/forms.css' %}">
 {% endblock %}
 
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
+<div class="container">
+    <form method="post" class="measurement-form">
+        {% csrf_token %}
+        <table class="form-table">
+            <thead>
+                <tr>
+                    <th colspan="2" class="header">Внесення показів</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><label for="{{ form.value_day.id_for_label }}">Показ "День":</label></td>
+                    <td>{{ form.value_day }}</td>
+                </tr>
+                <tr>
+                    <td><label for="{{ form.value_night.id_for_label }}">Показ "Ніч":</label></td>
+                    <td>{{ form.value_night }}</td>
+                </tr>
+                <tr>
+                    <td><label for="{{ form.plot.id_for_label }}">Номер ділянки</label></td>
+                    <td>{{ form.plot }}</td>
+                </tr>
+                <tr>
+                    <td><label for="{{ form.comment.id_for_label }}">Коментар<br/>(опціонально):</label></td>
+                    <td>{{ form.comment }}</td>
+                </tr>
+                <tr>
+                    <td></td><td><button type="submit">Зберігти</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
 {% endblock %}
-
-
-

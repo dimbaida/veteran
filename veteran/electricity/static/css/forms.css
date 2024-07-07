@@ -1,0 +1,82 @@
+/* forms.css */
+
+.measurement-form {
+    max-width: 500px;
+    margin: 50px auto; /* Center the form horizontally and add space before the form */
+}
+
+.form-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: auto; /* Center the table horizontally */
+}
+
+.form-table td,
+.form-table th {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: left; /* Align content in left column to the left */
+}
+
+.form-table th {
+    text-align: center; /* Center the header text */
+    font-weight: bold;
+    font-size: 20px;
+    border-bottom: 3px solid #ddd;
+}
+
+.form-table input[type="text"],
+.form-table select {
+    width: 120px;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.form-table textarea {
+    width: 100%;
+    min-height: 150px; /* Adjust the minimum height */
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.form-table input[name="plot"] {
+    width: 100px; /* Set width to 100px specifically for plot number input */
+}
+
+.form-table td.label-cell {
+    vertical-align: top; /* Align labels vertically to the top */
+}
+
+.form-table button[type="submit"] {
+    background-color: #f8f9fa;
+    border: 1px solid #f8f9fa;
+    border-radius: 4px;
+    color: #3c4043;
+    cursor: pointer;
+    font-family: Trebuchet MS, sans-serif;
+    font-size: 14px;
+    height: 36px;
+    width: 200px;
+    line-height: 27px;
+    min-width: 54px;
+    padding: 0 16px;
+    text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: pre;
+    margin-top: 10px;
+}
+
+.form-table button[type="submit"]:hover {
+    border-color: #dadce0;
+    box-shadow: rgba(0, 0, 0, .1) 0 1px 1px;
+    color: #202124;
+}
+
+.form-table button[type="submit"]:focus {
+    border-color: #4285f4;
+    outline: none;
+}
+
+/* Additional styles as needed */

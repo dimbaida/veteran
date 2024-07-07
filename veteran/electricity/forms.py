@@ -18,3 +18,4 @@ class MeasurementForm(forms.ModelForm):
                 self.fields['plot'].empty_label = None
             else:
                 self.fields['plot'].queryset = Plot.objects.none()  # No plots available if none found
+        self.fields['comment'].widget = forms.Textarea(attrs={'rows': 3})  # Adjust rows as needed
