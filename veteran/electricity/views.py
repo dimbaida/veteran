@@ -73,9 +73,7 @@ def compose_paycheck(request, plot_id, value_day_curr, value_night_curr):
                         purpose=f'Договір №{plot.verbose} від 01.06.2024 р., {user.lastname}.\n'
                                 f'День: {value_day_curr}, Ніч: {value_night_curr}, в т.ч. технологічні витрати')
 
-    pdf_buffer = paycheck.render()
-
-    response = HttpResponse(pdf_buffer, content_type='application/pdf')
+    response = HttpResponse(paycheck.render(), content_type='application/pdf')
     response['Content-Disposition'] = 'inline; filename="paycheck.pdf"'
 
     return response

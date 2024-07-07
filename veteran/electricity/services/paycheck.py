@@ -44,20 +44,17 @@ class Paycheck:
         self.value_night_curr: int = value_night_curr
         self.purpose: str = purpose
 
+
     def render(self):
-        print('PAYCHECK:RENDER')
         PRICE_DAY = 4.32
         PRICE_NIGHT = 2.16
 
-        content = []
-
-        # header
-        content.append(Cell(self.consumer, 437, 364, font='text', size=11, align="left"))
-        content.append(Cell(self.agreement, 437, 335, font='text', size=11, align="left"))
+        content = [Cell(self.consumer, 437, 364, font='text', size=11, align="left"),
+                   Cell(self.agreement, 437, 335, font='text', size=11, align="left")]
 
         # row 1
         value_day_diff = self.value_day_curr - self.value_day_prev
-        sum_day = (self.value_day_curr - self.value_day_prev) * 4.32
+        sum_day = value_day_diff * PRICE_DAY
 
         content.append(Cell(self.month, 184, 175))
         content.append(Cell(str(self.value_day_prev), 249, 175))
@@ -67,7 +64,7 @@ class Paycheck:
         content.append(Cell(f"{sum_day:.2f}", 521, 175))
 
         # row 2
-        value_day_tech = (self.value_day_curr - self.value_day_prev) * 0.25
+        value_day_tech = value_day_diff * 0.25
         sum_day_tech = value_day_tech * PRICE_DAY
 
         content.append(Cell(self.month, 184, 157))
@@ -77,7 +74,7 @@ class Paycheck:
 
         # row 3
         value_night_diff = self.value_night_curr - self.value_night_prev
-        sum_night = value_night_diff * 0.25 * PRICE_NIGHT
+        sum_night = value_night_diff * PRICE_NIGHT
 
         content.append(Cell(self.month, 184, 138.5))
         content.append(Cell(str(self.value_night_prev), 249, 138.5))
@@ -88,7 +85,7 @@ class Paycheck:
 
         # row 4
         value_night_tech = (self.value_night_curr - self.value_night_prev) * 0.25
-        sum_night_tech = value_night_tech * 0.25 * PRICE_NIGHT
+        sum_night_tech = value_night_tech * PRICE_NIGHT
 
         content.append(Cell(self.month, 184, 121))
         content.append(Cell(str(value_night_tech), 379, 121))
@@ -105,7 +102,6 @@ class Paycheck:
         canvas_data = self.get_overlay_canvas(content)
 
         template_path = settings.BASE_DIR / 'electricity/static/pdf/blank.pdf'
-
         form = self.merge(canvas_data, template_path=template_path)
         return form
 
@@ -114,7 +110,7 @@ class Paycheck:
         data = io.BytesIO()
         pdf = canvas.Canvas(data, pagesize=landscape(A5))
 
-        fonts_folder = template_path = settings.BASE_DIR / 'electricity/static/fonts'
+        fonts_folder = settings.BASE_DIR / 'electricity/static/fonts'
 
         pdfmetrics.registerFont(TTFont('RobotoMono-Regular', fonts_folder / 'RobotoMono-Regular.ttf'))
         pdfmetrics.registerFont(TTFont('RobotoMono-Bold', fonts_folder / 'RobotoMono-Bold.ttf'))
