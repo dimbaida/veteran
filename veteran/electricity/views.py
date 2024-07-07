@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 from .models import Measurement, Resident
 from .forms import MeasurementForm
-from django.contrib.auth.decorators import login_required
+from .services.paycheck import Paycheck
 
 
 def index(request):
@@ -51,3 +52,15 @@ def measurements(request):
                'verbose_names': verbose_names}
 
     return render(request, 'measurements.html', context)
+
+
+@login_required
+def compose_paycheck(request):
+    user = request.user
+
+    if request.method == 'POST':
+        paycheck = Paycheck()
+        paycheck.render()
+    else:
+        form = MeasurementForm(user=request.user)
+    return render(request, 'measurements_add.html', {'form': form})
