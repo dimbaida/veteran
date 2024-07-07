@@ -1,7 +1,7 @@
 /* forms.css */
 
 .measurement-form {
-    max-width: 500px;
+    max-width: 400px;
     margin: 50px auto; /* Center the form horizontally and add space before the form */
 }
 
@@ -25,27 +25,17 @@
     border-bottom: 1px solid #ddd;
 }
 
-
 .form-table input[type="text"],
+.form-table input[type="email"],
 .form-table input[type="number"],
 .form-table select,
-.form-table textarea {
-    width: 150px;
+.form-table textarea,
+.form-table input[type="password"] {
+    width: calc(100% - 16px); /* Adjust width to fit content */
     padding: 8px;
     box-sizing: border-box;
     font-family: 'Roboto Mono', monospace; /* Apply Roboto Mono font */
-}
-
-.form-table textarea {
-    vertical-align: top;
-    width: 100%;
-    min-height: 150px; /* Adjust the minimum height */
-    padding: 8px;
-    box-sizing: border-box;
-}
-
-.form-table input[name="plot"] {
-    width: 100px; /* Set width to 100px specifically for plot number input */
+    height: 36px; /* Set the height to match other form elements */
 }
 
 .form-table td.label-cell {

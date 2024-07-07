@@ -1,17 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    {% load static %}
-    <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-    <h2>Login</h2>
-    <form method="post">
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login - Your Site Name{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form method="post" class="measurement-form">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
+        <table class="form-table">
+            <thead>
+                <tr>
+                    <th colspan="2" class="header">Вхід на сайт</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><label for="{{ form.username.id_for_label }}">Електронна пошта</label></td>
+                    <td>{{ form.username }}</td>
+                </tr>
+                <tr>
+                    <td><label for="{{ form.password.id_for_label }}">Пароль</label></td>
+                    <td>{{ form.password }}</td>
+                </tr>
+                <tr>
+                    <td></td><td><button type="submit">Увійти</button></td>
+                </tr>
+            </tbody>
+        </table>
     </form>
-</body>
-</html>
+</div>
+{% endblock %}

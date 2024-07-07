@@ -1,14 +1,52 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Register</title>
-</head>
-<body>
-    <h2>Register</h2>
-    <form method="post">
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Registration - Your Site Name{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form method="post" class="measurement-form">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
+        <table class="form-table">
+            <thead>
+                <tr>
+                    <th colspan="2" class="header">Реєстрація</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td width="150px"><label for="{{ form.email.id_for_label }}">Електронна пошта</label></td>
+                    <td>{{ form.email }}</td>
+                </tr>
+                <tr>
+                    <td><label for="{{ form.firstname.id_for_label }}">Ім'я</label></td>
+                    <td>{{ form.firstname }}</td>
+                </tr>
+                <tr>
+                    <td><label for="{{ form.lastname.id_for_label }}">Прізвище</label></td>
+                    <td>{{ form.lastname }}</td>
+                </tr>
+                <tr>
+                    <td><label for="{{ form.mobile.id_for_label }}">Номер мобільного</label></td>
+                    <td>{{ form.mobile }}</td>
+                </tr>
+                <tr>
+                    <td><label for="{{ form.password1.id_for_label }}">Пароль</label></td>
+                    <td>{{ form.password1 }}</td>
+                </tr>
+                <tr>
+                    <td><label for="{{ form.password2.id_for_label }}">Підтвердіть пароль</label></td>
+                    <td>{{ form.password2 }}</td>
+                </tr>
+                <tr>
+                    <td></td><td><button type="submit">Зареєструватись</button></td>
+                </tr>
+            </tbody>
+        </table>
     </form>
-</body>
-</html>
+</div>
+{% endblock %}

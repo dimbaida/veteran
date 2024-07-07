@@ -31,15 +31,16 @@ class Measurement(models.Model):
                                       blank=True,
                                       null=True)
     date_created = models.DateTimeField(auto_now_add=True,
-                                        verbose_name='Дата')
+                                        verbose_name='Дата створення')
     paid = models.BooleanField(default=False,
                                verbose_name='Оплачено')
     approved_by = models.ForeignKey(settings.AUTH_USER_MODEL,
                                     related_name='approved_measurements',
+                                    verbose_name='Оплату підтвердив',
                                     on_delete=models.PROTECT,
                                     null=True,
                                     blank=True)
-    date_approved = models.DateTimeField(verbose_name='Дата',
+    date_approved = models.DateTimeField(verbose_name='Дата підтвердження',
                                          null=True,
                                          blank=True)
     comment = models.CharField(default='',
