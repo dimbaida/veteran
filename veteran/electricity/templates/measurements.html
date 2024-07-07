@@ -19,6 +19,12 @@
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td colspan="5">
+                <button onclick="location.href = '{% url 'electricity:measurements_add' %}'"
+                        class="button" role="button">Внести свіжі покази</button>
+            </td>
+        </tr>
         {% for measurement in measurements %}
         <tr class="{% cycle 'odd' 'even' %} expandable-row">
             <td>{{ measurement.date_created|date:"d.m.Y" }}</td>
@@ -51,12 +57,6 @@
             <td colspan="5">Зверніться до адміністратора, щоб у вас відображались покази по вашій ділянці</td>
         </tr>
         {% endfor %}
-        <tr>
-            <td colspan="5">
-                <button onclick="location.href = '{% url 'electricity:measurements_add' %}'"
-                        class="button" role="button">Внести свіжі покази</button>
-            </td>
-        </tr>
     </tbody>
 </table>
 {% endblock %}
