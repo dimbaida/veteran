@@ -13,6 +13,7 @@ table {
 th, td {
     padding: 6px; /* Reduced padding for smaller row height */
     border: 1px solid #ccc;
+    height: 36px;
 }
 
 /* Alternate row background color */
@@ -93,6 +94,7 @@ th, td {
     table tr {
         display: block;
         margin-bottom: 15px;
+        height: 50px;
     }
 
     table td {

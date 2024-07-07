@@ -1,6 +1,7 @@
 import io
-from pathlib import Path
 import pdfrw
+import datetime
+
 from django.conf import settings
 from reportlab.lib.pagesizes import A5, landscape
 from reportlab.pdfgen import canvas
@@ -142,3 +143,23 @@ class Paycheck:
         form.seek(0)
         return form
 
+    @staticmethod
+    def getCurrentMonth():
+        current_date = datetime.date.today()
+        current_month = current_date.month
+        ukrainian_months = {
+            1: "Січень",
+            2: "Лютий",
+            3: "Березень",
+            4: "Квітень",
+            5: "Травень",
+            6: "Червень",
+            7: "Липень",
+            8: "Серпень",
+            9: "Вересень",
+            10: "Жовтень",
+            11: "Листопад",
+            12: "Грудень"
+        }
+
+        return ukrainian_months[current_month]

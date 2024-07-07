@@ -15,7 +15,7 @@
             <th width="100px">{{ verbose_names.plot }}</th>
             <th width="100px">{{ verbose_names.value_day }}</th>
             <th width="100px">{{ verbose_names.value_night }}</th>
-            <th width="100px">{{ verbose_names.paid }}</th>
+            <th width="120px">Статус</th>
         </tr>
     </thead>
     <tbody>
@@ -25,7 +25,13 @@
             <td>{{ measurement.plot.verbose }}</td>
             <td>{{ measurement.value_day }}</td>
             <td>{{ measurement.value_night }}</td>
-            <td>{% if measurement.paid %}так{% else %}ні{% endif %}</td>
+            <td>{% if measurement.paid %}
+                оплачено
+                {% else %}
+                <button onclick="window.open('{% url 'electricity:compose_paycheck' measurement.plot.id measurement.value_day measurement.value_night %}', '_blank')"
+        class="button" role="button">Квитанція</button>
+
+                {% endif %}</td>
         </tr>
         <tr class="additional-info" style="display: none;">
             <td colspan="5"  style="text-align: left;">
@@ -38,10 +44,6 @@
                     <li> Дата підтвердження: {{ measurement.date_approved|date:"d.m.Y H:i" }} </li>
                     {% endif %}
                 </ul>
-                {% if not measurement.paid %}
-                <button onclick="location.href = '{% url 'electricity:compose_paycheck' measurement.plot.id measurement.value_day measurement.value_night %}'"
-                        class="button" role="button">Сформувати квитанцію</button>
-                {% endif %}
             </td>
         </tr>
         {% empty %}

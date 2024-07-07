@@ -65,7 +65,7 @@ def compose_paycheck(request, plot_id, value_day_curr, value_night_curr):
 
     paycheck = Paycheck(consumer=user.lastname,
                         agreement=f"№{plot.verbose} від 01.06.2024",
-                        month='вересень',
+                        month=Paycheck.getCurrentMonth(),
                         value_day_prev=value_day_prev,
                         value_day_curr=value_day_curr,
                         value_night_prev=value_night_prev,
