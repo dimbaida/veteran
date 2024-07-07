@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from .models import Measurement, Resident, Plot
+from django.shortcuts import get_object_or_404
+
+from .models import Measurement, Plot
 from .forms import MeasurementForm
 from .services.paycheck import Paycheck
 
@@ -56,27 +58,24 @@ def measurements(request):
 @login_required
 def compose_paycheck(request, plot_id, value_day_curr, value_night_curr):
     user = request.user
-    plot = Plot.objects.get(id=plot_id)
-    value_day_prev = 0
-    value_night_prev = 0
+    plot = get_object_or_404(Plot, id=plot_id)
+    latest_measurement = Measurement.objects.filter(plot_id=plot_id, paid=True).order_by('-date_approved').first()
+    value_day_prev = latest_measurement.value_day
+    value_night_prev = latest_measurement.value_night
 
-    # print(f'user: {user}\nplot: {plot}\nvalue_day_curr: {value_day_curr}\nvalue_night_curr: {value_night_curr}')
+    paycheck = Paycheck(consumer=user.lastname,
+                        agreement=f"№{plot.verbose} від 01.06.2024",
+                        month='вересень',
+                        value_day_prev=value_day_prev,
+                        value_day_curr=value_day_curr,
+                        value_night_prev=value_night_prev,
+                        value_night_curr=value_night_curr,
+                        purpose=f'Договір №{plot.verbose} від 01.06.2024 р., {user.lastname}.\n'
+                                f'День: {value_day_curr}, Ніч: {value_night_curr}, в т.ч. технологічні витрати')
 
-    if request.method == 'POST':
-        paycheck = Paycheck(consumer=user.lastname,
-                            agreement=f"№{plot.verbose} від 01.06.2024",
-                            month='вересень',
-                            value_day_prev=value_day_prev,
-                            value_day_curr=value_day_curr,
-                            value_night_prev=value_night_prev,
-                            value_night_curr=value_night_curr,
-                            purpose=f'Договір №{plot.verbose} від 01.06.2024 р., {user.lastname}.\n'
-                                    f'День: {value_day_curr}, Ніч: {value_night_curr}, в т.ч. технологічні витрати')
+    pdf_buffer = paycheck.render()
 
-        pdf_buffer = paycheck.render()
+    response = HttpResponse(pdf_buffer, content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="paycheck.pdf"'
 
-        # Create a response with the PDF file
-        response = HttpResponse(pdf_buffer, content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="paycheck.pdf"'
-
-        return response
+    return response

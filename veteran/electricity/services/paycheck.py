@@ -1,5 +1,7 @@
 import io
+from pathlib import Path
 import pdfrw
+from django.conf import settings
 from reportlab.lib.pagesizes import A5, landscape
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase.ttfonts import TTFont
@@ -42,6 +44,7 @@ class Paycheck:
         self.purpose: str = purpose
 
     def render(self):
+        print('PAYCHECK:RENDER')
         PRICE_DAY = 4.32
         PRICE_NIGHT = 2.16
 
@@ -100,8 +103,9 @@ class Paycheck:
 
         canvas_data = self.get_overlay_canvas(content)
 
-        form = self.merge(canvas_data, template_path='static/pdf/blank.pdf')
+        template_path = settings.BASE_DIR / 'electricity/static/pdf/blank.pdf'
 
+        form = self.merge(canvas_data, template_path=template_path)
         return form
 
     @staticmethod
@@ -109,9 +113,11 @@ class Paycheck:
         data = io.BytesIO()
         pdf = canvas.Canvas(data, pagesize=landscape(A5))
 
-        pdfmetrics.registerFont(TTFont('RobotoMono-Regular', 'static/fonts/RobotoMono-Regular.ttf'))
-        pdfmetrics.registerFont(TTFont('RobotoMono-Bold', 'static/fonts/RobotoMono-Bold.ttf'))
-        pdfmetrics.registerFont(TTFont('Aptos', 'static/fonts/aptos.ttf'))
+        fonts_folder = template_path = settings.BASE_DIR / 'electricity/static/fonts'
+
+        pdfmetrics.registerFont(TTFont('RobotoMono-Regular', fonts_folder / 'RobotoMono-Regular.ttf'))
+        pdfmetrics.registerFont(TTFont('RobotoMono-Bold', fonts_folder / 'RobotoMono-Bold.ttf'))
+        pdfmetrics.registerFont(TTFont('Aptos', fonts_folder / 'aptos.ttf'))
 
         for cell in cells:
             pdf.setFont(cell.font, cell.size)
