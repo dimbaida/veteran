@@ -5,7 +5,7 @@ from .models import Measurement, Resident, Plot
 class MeasurementForm(forms.ModelForm):
     class Meta:
         model = Measurement
-        fields = ('value_day', 'value_night', 'plot')
+        fields = ('value_day', 'value_night', 'plot', 'comment')
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)

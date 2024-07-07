@@ -1,0 +1,18 @@
+body {
+    background-color: #eee;
+    font-family: Trebuchet MS;
+    font-size: 14px;
+}
+a {
+    font-weight: bold;
+    font-color: #aaa;
+    text-decoration: none;
+}
+a:visited {
+  color: #aaa;
+}
+a:hover {
+    font-color: #000;
+    font-weight: bold;
+    text-decoration: underline;
+}

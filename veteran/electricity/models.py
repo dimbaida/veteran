@@ -43,7 +43,7 @@ class Measurement(models.Model):
                                          null=True,
                                          blank=True)
     comment = models.CharField(default='',
-                               verbose_name='comment',
+                               verbose_name='Коментар (опціонально)',
                                null=True,
                                blank=True)
 

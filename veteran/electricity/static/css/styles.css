@@ -29,7 +29,7 @@ tr.paid {
 }
 
 tr.additional-info {
-    background-color: #eef7ff; /* Bluish background color for expanded row */
+    background-color: #eee; /* Bluish background color for expanded row */
     text-align: left;
 }
 
@@ -41,7 +41,7 @@ th {
 
 /* Hover effect for rows */
 tr:hover {
-    background-color: #e0f0ff;
+    background-color: #eee;
 }
 
 /* Center text in header and cells */
