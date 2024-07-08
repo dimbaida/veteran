@@ -44,16 +44,16 @@
                 <ul>
                     <li> Показ надав: {{ measurement.created_by }}
                     <li> Дата і час: {{ measurement.date_created|date:"d.m.Y H:i" }}
-                    <li> Комментар: {{ measurement.comment }}</li>
                     {% if measurement.paid %}
                     <li> Оплату підтвердив: {{ measurement.approved_by }}</li>
                     <li> Дата підтвердження: {{ measurement.date_approved|date:"d.m.Y H:i" }} </li>
                     {% endif %}
+                    <li> Комментар: {{ measurement.comment }}</li>
                 </ul>
             </td>
         </tr>
         {% empty %}
-        <tr height="120px">
+        <tr>
             <td colspan="5">Зверніться до адміністратора, щоб у вас відображались покази по вашій ділянці</td>
         </tr>
         {% endfor %}
