@@ -3,6 +3,7 @@ import pdfrw
 import datetime
 
 from django.conf import settings
+
 from reportlab.lib.pagesizes import A5, landscape
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase.ttfonts import TTFont
@@ -43,7 +44,6 @@ class Paycheck:
         self.value_night_prev: int = value_night_prev
         self.value_night_curr: int = value_night_curr
         self.purpose: str = purpose
-
 
     def render(self):
         PRICE_DAY = 4.32

@@ -69,4 +69,4 @@ class Resident(models.Model):
         verbose_name_plural = 'Резиденти'
 
     def __str__(self):
-        return f"{self.plot.verbose} -- {self.user.lastname} {self.user.firstname}"
+        return f"{self.plot.verbose} -- {self.user}"

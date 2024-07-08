@@ -63,14 +63,14 @@ def compose_paycheck(request, plot_id, value_day_curr, value_night_curr):
     value_day_prev = latest_measurement.value_day
     value_night_prev = latest_measurement.value_night
 
-    paycheck = Paycheck(consumer=user.lastname,
+    paycheck = Paycheck(consumer=user.last_name,
                         agreement=f"№{plot.verbose} від 01.06.2024",
                         month=Paycheck.getCurrentMonth(),
                         value_day_prev=value_day_prev,
                         value_day_curr=value_day_curr,
                         value_night_prev=value_night_prev,
                         value_night_curr=value_night_curr,
-                        purpose=f'Договір №{plot.verbose} від 01.06.2024 р., {user.lastname}.\n'
+                        purpose=f'Договір №{plot.verbose} від 01.06.2024 р., {user.last_name}.\n'
                                 f'День: {value_day_curr}, Ніч: {value_night_curr}, в т.ч. технологічні витрати')
 
     response = HttpResponse(paycheck.render(), content_type='application/pdf')
