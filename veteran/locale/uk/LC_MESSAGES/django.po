@@ -697,7 +697,7 @@ msgstr "Показати всі"
 
 #: contrib/admin/templates/admin/search_form.html:8
 msgid "Go"
-msgstr "Уперед"
+msgstr "Вперед"
 
 #: contrib/admin/templates/admin/search_form.html:10
 #, python-format

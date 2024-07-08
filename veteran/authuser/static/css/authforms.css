@@ -74,4 +74,18 @@
     outline: none;
 }
 
-/* Additional styles as needed */
+/* Styles for form error messages */
+form .errorlist {
+    color: red !important;
+    margin: 10px 0;
+}
+
+form .errorlist ul {
+    padding-left: 20px; /* Adjust as needed */
+    margin: 0;
+}
+
+form .errorlist li {
+    list-style-type: disc; /* Change to your preferred bullet style */
+    margin: 0;
+}

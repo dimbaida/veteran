@@ -8,45 +8,68 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <form method="post" class="measurement-form">
-        {% csrf_token %}
-        <table class="form-table">
-            <thead>
-                <tr>
-                    <th colspan="2" class="header">Реєстрація</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td width="150px"><label for="{{ form.email.id_for_label }}">Електронна пошта</label></td>
-                    <td>{{ form.email }}</td>
-                </tr>
-                <tr>
-                    <td><label for="{{ form.firstname.id_for_label }}">Ім'я</label></td>
-                    <td>{{ form.firstname }}</td>
-                </tr>
-                <tr>
-                    <td><label for="{{ form.lastname.id_for_label }}">Прізвище</label></td>
-                    <td>{{ form.lastname }}</td>
-                </tr>
-                <tr>
-                    <td><label for="{{ form.mobile.id_for_label }}">Номер мобільного</label></td>
-                    <td>{{ form.mobile }}</td>
-                </tr>
-                <tr>
-                    <td><label for="{{ form.password1.id_for_label }}">Пароль</label></td>
-                    <td>{{ form.password1 }}</td>
-                </tr>
-                <tr>
-                    <td><label for="{{ form.password2.id_for_label }}">Підтвердіть пароль</label></td>
-                    <td>{{ form.password2 }}</td>
-                </tr>
-                <tr>
-                    <td></td><td><button type="submit">Зареєструватись</button></td>
-                </tr>
-            </tbody>
-        </table>
-    </form>
-</div>
+    <div class="container">
+        <form method="post" class="measurement-form">
+            {% csrf_token %}
+            <table class="form-table">
+                <thead>
+                    <tr>
+                        <th colspan="2" class="header">Реєстрація</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><label for="{{ form.username.id_for_label }}">Юзернейм<span class="required">*</span></label></td>
+                        <td>{{ form.username }}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="{{ form.first_name.id_for_label }}">Ім'я<span class="required">*</span></label></td>
+                        <td>{{ form.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="{{ form.last_name.id_for_label }}">Прізвище<span class="required">*</span></label></td>
+                        <td>{{ form.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="{{ form.mobile.id_for_label }}">Номер мобільного<span class="required">*</span></label></td>
+                        <td>{{ form.mobile }}</td>
+                    </tr>
+                    <tr>
+                        <td width="150px"><label for="{{ form.email.id_for_label }}">Електронна пошта</label></td>
+                        <td>{{ form.email }}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="{{ form.password1.id_for_label }}">Пароль<span class="required">*</span></label></td>
+                        <td>{{ form.password1 }}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="{{ form.password2.id_for_label }}">Підтвердіть пароль<span class="required">*</span></label></td>
+                        <td>{{ form.password2 }}</td>
+                    </tr>
+                    {% if form.errors %}
+                    <tr>
+                        <td colspan="2">
+                            <div class="errorlist">
+                                Виправте помилки при введенні даних:
+                                <ul>
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% for error in form.non_field_errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td></td><td><button type="submit">Зареєструватись</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
 {% endblock %}

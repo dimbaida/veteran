@@ -14,6 +14,8 @@ def register(request):
             user = form.save()
             login(request, user)  # Log the user in after successful registration
             return redirect(reverse('electricity:measurements'))  # Redirect to home page or any other page
+        else:
+            messages.error(request, 'Please correct the error below.')
     else:
         form = CustomUserCreationForm()
     return render(request, 'register.html', {'form': form})

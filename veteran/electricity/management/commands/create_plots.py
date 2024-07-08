@@ -30,8 +30,6 @@ class Command(BaseCommand):
             value_night_avg = self.convertToNumber(row[4])
             value_day_avg = self.convertToNumber(row[5])
 
-
-
             print(f"plot {verbose}, val_day: {value_day}, val_night: {value_night}, val_day_avg: {value_day_avg}, val_night_avg: {value_night_avg}")
             plot, plot_created = Plot.objects.get_or_create(verbose=verbose,
                                                             value_night_avg=value_night_avg,
