@@ -42,13 +42,15 @@
         <tr class="additional-info" style="display: none;">
             <td colspan="5"  style="text-align: left;">
                 <ul>
-                    <li> Показ надав: {{ measurement.created_by }}
-                    <li> Дата і час: {{ measurement.date_created|date:"d.m.Y H:i" }}
+                    <li><span class="label-text">Показ надав:</span> {{ measurement.created_by }}</li>
+                    <li><span class="label-text">Дата і час:</span> {{ measurement.date_created|date:"d.m.Y H:i" }}
                     {% if measurement.paid %}
-                    <li> Оплату підтвердив: {{ measurement.approved_by }}</li>
-                    <li> Дата підтвердження: {{ measurement.date_approved|date:"d.m.Y H:i" }} </li>
+                    <li><span class="label-text">Оплату підтвердив:</span> {{ measurement.approved_by }}</li>
+                    <li><span class="label-text">Дата підтвердження:</span> {{ measurement.date_approved|date:"d.m.Y H:i" }} </li>
                     {% endif %}
-                    <li> Комментар: {{ measurement.comment }}</li>
+                    {% if measurement.comment %}
+                    <li><span class="label-text">Комментар:</span> {{ measurement.comment }}</li>
+                    {% endif %}
                 </ul>
             </td>
         </tr>

@@ -78,6 +78,7 @@ th, td {
   outline: none;
 }
 
+
 /* Responsive table */
 @media screen and (max-width: 800px) {
     table {
@@ -115,4 +116,8 @@ th, td {
         font-weight: bold;
         text-align: left;
     }
+}
+
+.label-text {
+    color: grey;
 }

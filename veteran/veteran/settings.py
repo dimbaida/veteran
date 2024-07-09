@@ -138,6 +138,6 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = 'authuser/login'  # Redirects to this URL if the user is not logged in
-LOGIN_REDIRECT_URL = 'electricity/measurements'  # Redirects to this URL after login
-LOGOUT_REDIRECT_URL = 'authuser/login'  # Redirects to this URL after logout
+LOGIN_URL = '/authuser/login'  # Redirects to this URL if the user is not logged in
+LOGIN_REDIRECT_URL = '/electricity/measurements'  # Redirects to this URL after login
+LOGOUT_REDIRECT_URL = '/authuser/login'  # Redirects to this URL after logout

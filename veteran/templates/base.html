@@ -13,12 +13,23 @@
 
     <!-- Menu -->
     <nav class="top-menu" style="text-align: center">
-        <a href="{% url 'authuser:login' %}">Вхід</a> ||
-        <a href="{% url 'electricity:measurements' %}">Покази</a> ||
+        <a href="{% url 'electricity:measurements' %}">Покази лічильника</a> ||
+        {% if user.is_staff %}
+        <a href="{% url 'admin:index' %}">Панель адміністратора</a> ||
+        {% endif %}
         {% if user.is_authenticated %}
         {{ user.last_name }} {{ user.first_name }}
+        <form id="logout-form" method="POST" action="{% url 'authuser:logout' %}" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit">Вийти</button>
+        </form>
         {% else %}
         <a href="{% url 'authuser:register' %}">Реєстрація</a>
+        {% endif %}
+
+        <!-- Other navigation links -->
+        {% if user.is_authenticated %}
+
         {% endif %}
     </nav>
 
@@ -40,6 +51,5 @@
     <!-- Block for additional JavaScript -->
     {% block extra_js %}
     {% endblock %}
-
     </body>
 </html>
