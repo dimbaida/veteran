@@ -1,7 +1,17 @@
+html {
+    height: 95%;
+    position: relative;
+}
+
 body {
+    margin-top: 25px;
     background-color: #eee;
     font-family: Trebuchet MS;
     font-size: 14px;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+
 }
 a {
     color: #000;
@@ -16,6 +26,10 @@ a:hover {
 }
 
 footer {
-     text-align: center;
-     color: #ddd;
+    color: #ddd;
+    text-align: center;
+    padding: 10px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }

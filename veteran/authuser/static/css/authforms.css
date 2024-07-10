@@ -1,7 +1,7 @@
 /* forms.css */
 
 .measurement-form {
-    max-width: 400px;
+    max-width: 300px;
     margin: 50px auto; /* Center the form horizontally and add space before the form */
 }
 
@@ -15,7 +15,6 @@
 .form-table th {
     padding: 8px;
     border-bottom: 1px solid #ddd;
-    text-align: left; /* Align content in left column to the left */
 }
 
 .form-table th {
@@ -31,7 +30,7 @@
 .form-table select,
 .form-table textarea,
 .form-table input[type="password"] {
-    width: calc(100% - 16px); /* Adjust width to fit content */
+    width: 100%; /* Adjust width to fit content */
     padding: 8px;
     box-sizing: border-box;
     font-family: 'Roboto Mono', monospace; /* Apply Roboto Mono font */
@@ -88,4 +87,9 @@ form .errorlist ul {
 form .errorlist li {
     list-style-type: disc; /* Change to your preferred bullet style */
     margin: 0;
+}
+
+
+.center-align {
+    text-align: right; /* Center-align content */
 }

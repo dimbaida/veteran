@@ -11,7 +11,7 @@ table {
 th, td {
     padding: 6px; /* Reduced padding for smaller row height */
     border: 1px solid #ccc;
-    height: 36px;
+    height: 26px;
 }
 
 /* Alternate row background color */
@@ -49,15 +49,15 @@ th, td {
 }
 
 .button {
-  background-color: #f8f9fa;
+  background-color: #777;
   border: 1px solid #f8f9fa;
   border-radius: 4px;
-  color: #3c4043;
+  color: #fff;
   cursor: pointer;
   font-family: Trebuchet MS, sans-serif;
   font-size: 14px;
-  height: 36px;
-  line-height: 27px;
+  height: 26px;
+  line-height: 24px;
   min-width: 54px;
   padding: 0 16px;
   text-align: center;
