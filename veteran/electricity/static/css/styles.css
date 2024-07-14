@@ -7,40 +7,28 @@ table {
     border: 1px solid #ccc;
 }
 
-/* Table header and cell styling */
-th, td {
-    padding: 6px; /* Reduced padding for smaller row height */
-    border: 1px solid #ccc;
-    height: 26px;
-}
-
-/* Alternate row background color */
-tr.odd {
-    background-color: #f9f9f9;
-}
-
-tr.even {
-    background-color: white;
-}
-
-tr.paid {
-    background-color: green;
-}
-
-tr.additional-info {
-    background-color: #eee; /* Bluish background color for expanded row */
-    text-align: left;
-}
-
 /* Header background color */
 th {
     background-color: #333;
     color: white;
 }
 
-/* Hover effect for rows */
-tr:hover {
-    background-color: #eee;
+th, td {
+    padding: 6px; /* Reduced padding for smaller row height */
+    border: 1px solid #ccc;
+    height: 26px;
+}
+
+tr.unpaid {
+    background-color: white;
+}
+
+tr.paid {
+    background-color: #f2f2f2;
+}
+
+tr.additional-info {
+    text-align: left;
 }
 
 /* Center text in header and cells */

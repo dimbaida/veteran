@@ -26,20 +26,21 @@
             </td>
         </tr>
         {% for measurement in measurements %}
-        <tr class="{% cycle 'odd' 'even' %} expandable-row">
+        <tr class="{% if measurement.paid %} paid {% else %} unpaid {% endif %} expandable-row">
             <td>{{ measurement.date_created|date:"d.m.Y" }}</td>
             <td>{{ measurement.plot.verbose }}</td>
             <td>{{ measurement.value_day }}</td>
             <td>{{ measurement.value_night }}</td>
-            <td>{% if measurement.paid %}
+            <td>
+                {% if measurement.paid %}
                 оплачено
                 {% else %}
                 <button onclick="window.open('{% url 'electricity:compose_paycheck' measurement.plot.id measurement.value_day measurement.value_night %}', '_blank')"
-        class="button" role="button">Квитанція</button>
-
-                {% endif %}</td>
+                        class="button" role="button">Квитанція</button>
+                {% endif %}
+            </td>
         </tr>
-        <tr class="additional-info" style="display: none;">
+        <tr class="{% if measurement.paid %} paid {% else %} unpaid {% endif %} additional-info" style="display: none;">
             <td colspan="5"  style="text-align: left;">
                 <ul>
                     <li><span class="label-text">Показ надав:</span> {{ measurement.created_by }}</li>
