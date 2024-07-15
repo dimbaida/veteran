@@ -40,6 +40,14 @@ def measurements(request):
 
     plots = user.resident_set.values_list('plot__id', flat=True)  # Get IDs of plots associated with the user
     measurements = Measurement.objects.filter(plot__id__in=plots).order_by('-date_created')
+
+    for measurement in measurements:
+        measurement.has_newer_paid = Measurement.objects.filter(
+            plot=measurement.plot,
+            date_created__gt=measurement.date_created,
+            paid=True
+        ).exists()
+
     verbose_names = {
         'date_created': Measurement._meta.get_field('date_created').verbose_name,
         'value_day': Measurement._meta.get_field('value_day').verbose_name,

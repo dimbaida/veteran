@@ -26,7 +26,7 @@
             </td>
         </tr>
         {% for measurement in measurements %}
-        <tr class="{% if measurement.paid %} paid {% else %} unpaid {% endif %} expandable-row">
+        <tr class="{% if measurement.paid or measurement.has_newer_paid%} paid {% else %} unpaid {% endif %} expandable-row">
             <td>{{ measurement.date_created|date:"d.m.Y" }}</td>
             <td>{{ measurement.plot.verbose }}</td>
             <td>{{ measurement.value_day }}</td>
@@ -34,6 +34,8 @@
             <td>
                 {% if measurement.paid %}
                 оплачено
+                {% elif measurement.has_newer_paid %}
+                застарілий
                 {% else %}
                 <button onclick="window.open('{% url 'electricity:compose_paycheck' measurement.plot.id measurement.value_day measurement.value_night %}', '_blank')"
                         class="button" role="button">Квитанція</button>

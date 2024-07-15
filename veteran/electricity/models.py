@@ -26,10 +26,14 @@ class Measurement(models.Model):
     plot = models.ForeignKey(Plot,
                              on_delete=models.PROTECT,
                              verbose_name='Ділянка',)
-    value_day = models.IntegerField(verbose_name='День')
+    value_day = models.IntegerField(verbose_name='День',
+                                    blank=False,
+                                    null=False,
+                                    default=0)
     value_night = models.IntegerField(verbose_name='Ніч',
-                                      blank=True,
-                                      null=True)
+                                      blank=False,
+                                      null=False,
+                                      default=0)
     date_created = models.DateTimeField(auto_now_add=True,
                                         verbose_name='Дата створення')
     paid = models.BooleanField(default=False,

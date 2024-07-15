@@ -43,7 +43,7 @@ class Command(BaseCommand):
                                                                                      approved_by_id=1,
                                                                                      created_by_id=1,
                                                                                      paid=True,
-                                                                                     comment='Показ на момент запуску сайту')
+                                                                                     comment='Початкові покази')
                 if measurement_created:
                     print(measurement, 'ctreated')
             else:
