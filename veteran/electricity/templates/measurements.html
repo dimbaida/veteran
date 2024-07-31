@@ -26,7 +26,7 @@
             </td>
         </tr>
         {% for measurement in measurements %}
-        <tr class="{% if measurement.paid or measurement.has_newer_paid%} paid {% else %} unpaid {% endif %} expandable-row">
+        <tr class="{% if measurement.paid or measurement.has_newer_paid %} paid {% else %} unpaid {% endif %} expandable-row">
             <td>{{ measurement.date_created|date:"d.m.Y" }}</td>
             <td>{{ measurement.plot.verbose }}</td>
             <td>{{ measurement.value_day }}</td>
@@ -42,7 +42,7 @@
                 {% endif %}
             </td>
         </tr>
-        <tr class="{% if measurement.paid %} paid {% else %} unpaid {% endif %} additional-info" style="display: none;">
+        <tr class="{% if measurement.paid or measurement.has_newer_paid %} paid {% else %} unpaid {% endif %} additional-info" style="display: none;">
             <td colspan="5"  style="text-align: left;">
                 <ul>
                     <li><span class="label-text">Показ надав:</span> {{ measurement.created_by }}</li>
