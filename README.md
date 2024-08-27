@@ -1,4 +1,8 @@
 # veteran
+To run the server:
+```bash
+python manage.py runserver
+```
 
 To update the SQL queries: 
 ```bash
