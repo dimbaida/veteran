@@ -11,7 +11,7 @@ class Command(BaseCommand):
     @staticmethod
     def readValues():
         filepath = Path(__file__).parent / 'plots.csv'
-        with open(filepath, mode='r') as csv_file:
+        with open(filepath, mode='r', encoding='utf-8') as csv_file:
             table = csv.reader(csv_file)
             return list(table)
 
